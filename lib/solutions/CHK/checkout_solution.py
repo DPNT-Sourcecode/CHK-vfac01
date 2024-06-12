@@ -67,9 +67,7 @@ def checkout(skus):
             nongroup_sku_string = nongroup_sku_string + sku
 
     group_discount_skus = ''.join([sku for sku in group_sku_string if sku in group_discount_items])
-    # print(group_discount_skus)
     sorted_group_discount_skus = ''.join(sorted(group_discount_skus, key=lambda sku:sorted_price_table[sku], reverse=True))
-    # print(sorted_group_discount_skus)
     skus = sorted_group_discount_skus + nongroup_sku_string
     if not all(sku in price_table for sku in skus):
         return -1
@@ -80,10 +78,8 @@ def checkout(skus):
         sku_counts[sku] = sku_counts.get(sku, 0) + 1
 
     group_discount_count = sum(sku_counts.get(item, 0) for item in group_discount_items)
-    # print(group_discount_count)
     group_discount_application = group_discount_count // 3
     total_cost += group_discount_application * group_discount_price
-    print(total_cost)
     if group_discount_application > 0:
         run_times = group_discount_application * 3
         for sku in skus :
@@ -115,6 +111,7 @@ def checkout(skus):
             total_cost += count * price_table[sku]
 
     return total_cost
+
 
 
 
