@@ -12,8 +12,9 @@ def checkout(skus):
     }
 
     special_offers = {
-        'A': {'count': 3, 'price': 130},
-        'B': {'count': 2, 'price': 45}
+        'A': [{'count': 3, 'price': 130}, {'count': 5, 'price': 200}],
+        'B': [{'count': 2, 'price': 45}],
+        'E': [{'count': 2, 'free_item': 'B', 'free_count': 1}],
     }
 
     if not all(sku in price_table for sku in skus):
@@ -24,13 +25,24 @@ def checkout(skus):
     for sku in skus:
         sku_counts[sku] = sku_counts.get(sku, 0) + 1
           
+    if 'E' in sku_counts and 'E' in special_offers:
+        offer = special_offers['E'][0]
+        count_E = sku_counts['E']
+        free_B_count = (count_E // offer['count']) * offer['free_count']
+        if 'B' in sku_counts:
+            sku_counts['B'] += free_B_count
+        else:
+            sku_counts['B'] = free_B_count
+          
     for sku, count in sku_counts.items():
         if sku in special_offers:
-            special_offer = special_offers[sku]
-            num_special_offers = count // special_offer['count']
-            remaining_items = count % special_offer['count']
-            total_cost += num_special_offers * special_offer['price']
-            total_cost += remaining_items * price_table[sku]
+            for special_offer in sorted(special_offers[sku], key=lambda x: x['count'], reverse=True):
+                if 'price' in special_offer:
+                    num_special_offers = count // special_offer['count']
+                    remaining_items = count % special_offer['count']
+                    total_cost += num_special_offers * special_offer['price']
+                    count = remaining_items
+            total_cost += count * price_table[sku]
         else:
             total_cost += count * price_table[sku]
 
