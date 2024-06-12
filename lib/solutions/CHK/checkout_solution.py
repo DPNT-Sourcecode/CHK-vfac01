@@ -32,6 +32,8 @@ def checkout(skus):
         'Z': 50,
     }
 
+    sorted_price_table = {k: v for k, v in sorted(price_table.items(), key=lambda item: item[1], reverse=True)}
+
     special_offers = {
         'A': [{'count': 3, 'price': 130}, {'count': 5, 'price': 200}],
         'B': [{'count': 2, 'price': 45}],
@@ -70,7 +72,7 @@ def checkout(skus):
 
     if group_discount_application > 0:
         run_times = group_discount_application * 3
-        for sku in sorted(price[sku], key=lambda x: x['count'], reverse=True):
+        for sku in skus:
             if sku in group_discount_items:
                 if sku in sku_counts:
                     total_cost -= price_table[sku]
@@ -98,5 +100,6 @@ def checkout(skus):
             total_cost += count * price_table[sku]
 
     return total_cost
+
 
 
