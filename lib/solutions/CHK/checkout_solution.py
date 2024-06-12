@@ -8,13 +8,15 @@ def checkout(skus):
         'B': 30,
         'C': 20,
         'D': 15,
-        'E': 40
+        'E': 40,
+        'F': 10
     }
 
     special_offers = {
         'A': [{'count': 3, 'price': 130}, {'count': 5, 'price': 200}],
         'B': [{'count': 2, 'price': 45}],
         'E': [{'count': 2, 'free_item': 'B', 'free_count': 1}],
+        'F': [{'count': 3, 'price': 20}]
     }
 
     if not all(sku in price_table for sku in skus):
@@ -45,3 +47,4 @@ def checkout(skus):
             total_cost += count * price_table[sku]
 
     return total_cost
+
