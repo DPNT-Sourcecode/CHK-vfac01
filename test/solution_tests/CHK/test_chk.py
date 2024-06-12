@@ -29,5 +29,8 @@ class TestCheckout():
         assert checkout_solution.checkout('JIGHHLMOSTWHHH') == 345
         assert checkout_solution.checkout('JIGHHLMOSTWHHHHHHHH') == 380
         assert checkout_solution.checkout('KKKQQQQVV') == 430
+        assert checkout_solution.checkout('NNNMM') == 135
+        assert checkout_solution.checkout('UUUU') == 120
+        assert checkout_solution.checkout('RRRQ') == 150
      
 
