@@ -45,6 +45,7 @@ def checkout(skus):
         'R': [{'count': 3, 'free_item': 'Q', 'free_count': 1}],
         'U': [{'count': 4, 'price': 120}],
         'V': [{'count': 3, 'price': 130}, {'count': 2, 'price': 90}],
+        'Z': []
     }
 
     group_discount_items = {'S', 'T', 'X', 'Y', 'Z'}
@@ -86,5 +87,6 @@ def checkout(skus):
             total_cost += count * price_table[sku]
 
     return total_cost
+
 
 
