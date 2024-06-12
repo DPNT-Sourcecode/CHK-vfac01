@@ -45,6 +45,10 @@ def checkout(skus):
         'R': [{'count': 3, 'free_item': 'Q', 'free_count': 1}],
         'U': [{'count': 4, 'price': 120}],
         'V': [{'count': 3, 'price': 130}, {'count': 2, 'price': 90}],
+        'S': [],
+        'T': [],
+        'X': [],
+        'Y': [],
         'Z': []
     }
 
@@ -59,7 +63,7 @@ def checkout(skus):
     for sku in skus:
         sku_counts[sku] = sku_counts.get(sku, 0) + 1
 
-    group_discount_count = sum(sku_counts[item] for item in group_discount_items)
+    group_discount_count = sum(sku_counts.get(item, 0) for item in group_discount_items)
     group_discount_application = group_discount_count // 3
     total_cost += group_discount_application * group_discount_price
 
@@ -87,6 +91,7 @@ def checkout(skus):
             total_cost += count * price_table[sku]
 
     return total_cost
+
 
 
 
