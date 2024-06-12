@@ -9,14 +9,44 @@ def checkout(skus):
         'C': 20,
         'D': 15,
         'E': 40,
-        'F': 10
+        'F': 10,
+        'G': 20,
+        'H': 10,
+        'I': 35,
+        'J': 60,
+        'K': 80,
+        'L': 90,
+        'M': 15,
+        'N': 40,
+        'O': 10,
+        'P': 50,
+        'Q': 30,
+        'R': 50,
+        'S': 30,
+        'T': 20,
+        'U': 40,
+        'V': 50,
+        'W': 20,
+        'X': 90,
+        'Y': 10,
+        'Z': 50,
     }
 
     special_offers = {
         'A': [{'count': 3, 'price': 130}, {'count': 5, 'price': 200}],
         'B': [{'count': 2, 'price': 45}],
         'E': [{'count': 2, 'free_item': 'B', 'free_count': 1}],
-        'F': [{'count': 3, 'price': 20}]
+        'F': [{'count': 3, 'price': 20}],
+        'H': [{'count': 10, 'price': 80}, {'count': 5, 'price': 45}],
+        'K': [{'count': 2, 'price': 150}],
+        'N': [{'count': 3, 'free_item': 'M', 'free_count': 1}],
+        'P': [{'count': 5, 'price': 200}],
+        'Q': [{'count': 3, 'price': 80}],
+        'R': [{'count': 3, 'free_item': 'Q', 'free_count': 1}],
+        'U': [{'count': 4, 'price': 120}],
+        'V': [{'count': 3, 'price': 130}, {'count': 2, 'price': 90}],
+
+
     }
 
     if not all(sku in price_table for sku in skus):
@@ -27,12 +57,12 @@ def checkout(skus):
     for sku in skus:
         sku_counts[sku] = sku_counts.get(sku, 0) + 1
           
-    if 'E' in sku_counts and 'E' in special_offers:
-        offer = special_offers['E'][0]
-        count_E = sku_counts['E']
-        free_B_count = (count_E // offer['count']) * offer['free_count']
-        if 'B' in sku_counts:
-            sku_counts['B'] = max(sku_counts['B'] - free_B_count, 0)
+    # if 'E' in sku_counts and 'E' in special_offers:
+    #     offer = special_offers['E'][0]
+    #     count_E = sku_counts['E']
+    #     free_B_count = (count_E // offer['count']) * offer['free_count']
+    #     if 'B' in sku_counts:
+    #         sku_counts['B'] = max(sku_counts['B'] - free_B_count, 0)
           
     for sku, count in sku_counts.items():
         if sku in special_offers:
@@ -47,4 +77,3 @@ def checkout(skus):
             total_cost += count * price_table[sku]
 
     return total_cost
-
