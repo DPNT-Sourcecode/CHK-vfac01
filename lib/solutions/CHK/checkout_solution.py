@@ -28,11 +28,9 @@ def checkout(skus):
             special_offer = special_offers[sku]
             num_special_offers = count // special_offer['count']
             remaining_items = count % special_offer['count']
-            total_cost += num_special_offer * special_offer['price']
+            total_cost += num_special_offers * special_offer['price']
             total_cost += remaining_items * price_table[sku]
         else:
             total_cost += count * price_table[sku]
 
     return total_cost
-
-
