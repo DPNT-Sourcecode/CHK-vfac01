@@ -58,10 +58,10 @@ def checkout(skus):
     group_discount_price = 45
 
     group_discount_skus = ''.join([sku for sku in skus if sku in group_discount_items])
+    print(group_discount_skus)
     sorted_group_discount_skus = ''.join(sorted(group_discount_skus, key=lambda sku:sorted_price_table[sku], reverse=True))
-    skus = ''.join([sorted_group_discount_skus if sku in group_discount_items else sku for sku in skus])
-    print(skus)
-
+    print(sorted_group_discount_skus)
+    skus = sorted_group_discount_skus
     if not all(sku in price_table for sku in skus):
         return -1
 
