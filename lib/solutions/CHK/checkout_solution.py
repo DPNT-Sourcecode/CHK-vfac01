@@ -57,6 +57,11 @@ def checkout(skus):
     group_discount_items = {'S', 'T', 'X', 'Y', 'Z'}
     group_discount_price = 45
 
+    group_discount_skus = ''.join([sku for sku in skus if sku in group_discount_items])
+    sorted_group_discount_skus = ''.join(sorted(group_discount_skus, key=lambda sku:sorted_price_table[sku], reverse=True))
+    skus = ''.join([sorted_group_discount_skus if sku in group_discount_items else sku for sku in skus])
+    print(skus)
+
     if not all(sku in price_table for sku in skus):
         return -1
 
@@ -72,7 +77,7 @@ def checkout(skus):
     print(total_cost)
     if group_discount_application > 0:
         run_times = group_discount_application * 3
-        for sku in skus:
+        for sku in skus :
             if sku in group_discount_items:
                 if sku in sku_counts:
                     print(f"Hellow = {sku}")
@@ -101,6 +106,7 @@ def checkout(skus):
             total_cost += count * price_table[sku]
 
     return total_cost
+
 
 
 
