@@ -69,9 +69,10 @@ def checkout(skus):
     total_cost += group_discount_application * group_discount_price
 
     if group_discount_application > 0:
-        for item in group_discount_items:
-            if item in sku_counts:
-                total_cost -= price_table[item]
+        for sku in skus:
+            if sku in group_discount_items:
+                if sku in sku_counts:
+                    total_cost -= price_table[sku]
 
     for sku, offers in special_offers.items():
         for offer in offers:
