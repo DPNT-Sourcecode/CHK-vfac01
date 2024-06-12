@@ -66,15 +66,16 @@ def checkout(skus):
         sku_counts[sku] = sku_counts.get(sku, 0) + 1
 
     group_discount_count = sum(sku_counts.get(item, 0) for item in group_discount_items)
-    print(group_discount_count)
+    # print(group_discount_count)
     group_discount_application = group_discount_count // 3
     total_cost += group_discount_application * group_discount_price
-
+    print(total_cost)
     if group_discount_application > 0:
         run_times = group_discount_application * 3
         for sku in skus:
             if sku in group_discount_items:
                 if sku in sku_counts:
+                    print(f"Hellow = {sku}")
                     total_cost -= price_table[sku]
                     run_times -= 1
                     if run_times == 0:
