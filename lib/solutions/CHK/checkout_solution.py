@@ -45,9 +45,10 @@ def checkout(skus):
         'R': [{'count': 3, 'free_item': 'Q', 'free_count': 1}],
         'U': [{'count': 4, 'price': 120}],
         'V': [{'count': 3, 'price': 130}, {'count': 2, 'price': 90}],
-
-
     }
+
+    group_discount_items = {'S', 'T', 'X', 'Y', 'Z'}
+    group_discount_price = 45
 
     if not all(sku in price_table for sku in skus):
         return -1
@@ -56,13 +57,8 @@ def checkout(skus):
     sku_counts = {}
     for sku in skus:
         sku_counts[sku] = sku_counts.get(sku, 0) + 1
-          
-    # if 'E' in sku_counts and 'E' in special_offers:
-    #     offer = special_offers['E'][0]
-    #     count_E = sku_counts['E']
-    #     free_B_count = (count_E // offer['count']) * offer['free_count']
-    #     if 'B' in sku_counts:
-    #         sku_counts['B'] = max(sku_counts['B'] - free_B_count, 0)
+
+    group
 
     for sku, offers in special_offers.items():
         for offer in offers:
@@ -84,3 +80,4 @@ def checkout(skus):
             total_cost += count * price_table[sku]
 
     return total_cost
+
